@@ -33,9 +33,9 @@ try:
     model, scaler = load_model()
 except FileNotFoundError:
     st.warning("Model files not found. Generating them now... (This happens once)")
-    # Run setup_model.py to generate models
     import subprocess
-    subprocess.run(["python", "setup_model.py"], check=True)
+    import sys
+    subprocess.run([sys.executable, "setup_model.py"], check=True)
     model, scaler = load_model()
 
 # Function to map model clusters to User-Friendly IDs (0-4)
