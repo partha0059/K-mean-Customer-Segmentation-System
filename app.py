@@ -32,8 +32,11 @@ def load_model():
 try:
     model, scaler = load_model()
 except FileNotFoundError:
-    st.error("Model or Scaler not found. Please run 'setup_model.py' first.")
-    st.stop()
+    st.warning("Model files not found. Generating them now... (This happens once)")
+    # Run setup_model.py to generate models
+    import subprocess
+    subprocess.run(["python", "setup_model.py"], check=True)
+    model, scaler = load_model()
 
 # Function to map model clusters to User-Friendly IDs (0-4)
 def get_cluster_mapping(kmeans_model, scaler):
